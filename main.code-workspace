@@ -1,0 +1,134 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+	],
+	"settings": {
+		"makefile.launchConfigurations": [
+			{
+				"cwd": "c:\\Users\\benja\\Desktop\\Github Projects\\AroundAndAround\\build\\bin",
+				"binaryPath": "c:\\Users\\benja\\Desktop\\Github Projects\\AroundAndAround\\build\\bin\\game.exe",
+				"binaryArgs": []
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Debug",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder}/build/bin/game",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}",
+				"environment": [],
+				"externalConsole": false,
+				"MIMode": "gdb",
+				"setupCommands": [
+					{
+						"description": "Enable pretty-printing for gdb",
+						"text": "-enable-pretty-printing",
+						"ignoreFailures": false
+					}
+				],
+				"windows": {
+					"miDebuggerPath": "C:/raylib/w64devkit/bin/gdb.exe",
+				},
+				"osx": {
+					"MIMode": "lldb"
+				},
+				"linux": {
+					"miDebuggerPath": "/usr/bin/gdb",
+				},
+				"preLaunchTask": "build debug"
+			},
+			{
+				"name": "Run",
+				"type": "cppdbg",
+				"request": "launch",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}",
+				"environment": [],
+				"externalConsole": false,
+				"program": "${workspaceFolder}/build/bin/game",
+				"MIMode": "gdb",
+				"windows": {
+					"program": "${workspaceFolder}/build/bin/game.exe",
+					"miDebuggerPath": "C:/raylib/w64devkit/bin/gdb.exe"
+				},
+				"osx": {
+					"MIMode": "lldb"
+				},
+				"linux": {
+					"miDebuggerPath": "/usr/bin/gdb"
+				},
+				"preLaunchTask": "build release",
+			}
+		],
+		"compounds": []
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "build debug",
+				"type": "process",
+				"command": "make",
+				"args": [
+					"PLATFORM=PLATFORM_DESKTOP",
+					"BUILD_MODE=DEBUG",
+				],
+				"windows": {
+					"command": "mingw32-make.exe",
+					"args": [
+						"RAYLIB_PATH=C:/raylib/raylib",
+						"BUILD_MODE=DEBUG"
+					],
+				},
+				"osx": {
+					"args": [
+						"RAYLIB_PATH=<path_to_raylib>/raylib",
+						"BUILD_MODE=DEBUG"
+					],
+				},
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"problemMatcher": [
+					"$gcc"
+				]
+			},
+			{
+				"label": "build release",
+				"type": "process",
+				"command": "make",
+				"args": [
+					"PLATFORM=PLATFORM_DESKTOP",
+					"BUILD_MODE=RELEASE",
+				],
+				"windows": {
+					"command": "mingw32-make.exe",
+					"args": [
+						"RAYLIB_PATH=C:/raylib/raylib",
+						"BUILD_MODE=RELEASE"
+					],
+				},
+				"osx": {
+					"args": [
+						"RAYLIB_PATH=<path_to_raylib>/raylib",
+						"BUILD_MODE=RELEASE"
+					],
+				},
+				"group": "build",
+				"problemMatcher": [
+					"$gcc"
+				],
+			}
+		]
+	}
+}
