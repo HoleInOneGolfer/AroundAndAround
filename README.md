@@ -3,5 +3,3 @@
 Press **[SPACE]** to **change which direction** the orb is rotating so you can **collect dots**. The **different color dots do different things** from **points**, **reversing direction**, **speeding up**, and **slowing down**.
 
 I have been learning C as part of a college course, so I wanted to give raylib a try and this is my first game written with it.
-
-_I do already have a similar game like this on my page, but it was made with unity and is very laggy._
