@@ -3,7 +3,6 @@
 
 #include <raylib.h>
 #include <raymath.h>
-#include <raygui.h>
 
 #include "player.h"
 #include "ball.h"
