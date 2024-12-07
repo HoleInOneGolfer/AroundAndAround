@@ -6,7 +6,7 @@ RAYLIB_VERSION     ?= 4.5.0
 RAYLIB_PATH        ?= C:/raylib/raylib
 COMPILER_PATH      ?= C:/raylib/w64devkit/bin
 PLATFORM           ?= PLATFORM_DESKTOP
-BUILD_MODE         ?= RELEASE
+BUILD_MODE         ?= DEBUG
 MY_RC              ?= game.rc
 USE_EXTERNAL_GLFW  ?= FALSE
 

@@ -35,13 +35,8 @@
 					}
 				],
 				"windows": {
-					"miDebuggerPath": "C:/raylib/w64devkit/bin/gdb.exe",
-				},
-				"osx": {
-					"MIMode": "lldb"
-				},
-				"linux": {
-					"miDebuggerPath": "/usr/bin/gdb",
+					"program": "${workspaceFolder}/build/bin/game.exe",
+					"miDebuggerPath": "C:/raylib/w64devkit/bin/gdb.exe"
 				},
 				"preLaunchTask": "build debug"
 			},
@@ -49,24 +44,18 @@
 				"name": "Run",
 				"type": "cppdbg",
 				"request": "launch",
+				"program": "${workspaceFolder}/build/bin/game",
 				"args": [],
 				"stopAtEntry": false,
 				"cwd": "${workspaceFolder}",
 				"environment": [],
-				"externalConsole": false,
-				"program": "${workspaceFolder}/build/bin/game",
+				"externalConsole": true,
 				"MIMode": "gdb",
 				"windows": {
 					"program": "${workspaceFolder}/build/bin/game.exe",
 					"miDebuggerPath": "C:/raylib/w64devkit/bin/gdb.exe"
 				},
-				"osx": {
-					"MIMode": "lldb"
-				},
-				"linux": {
-					"miDebuggerPath": "/usr/bin/gdb"
-				},
-				"preLaunchTask": "build release",
+				"preLaunchTask": "build release"
 			}
 		],
 		"compounds": []
@@ -81,19 +70,10 @@
 				"args": [
 					"PLATFORM=PLATFORM_DESKTOP",
 					"BUILD_MODE=DEBUG",
+					"RAYLIB_PATH=C:/raylib/raylib"
 				],
 				"windows": {
-					"command": "mingw32-make.exe",
-					"args": [
-						"RAYLIB_PATH=C:/raylib/raylib",
-						"BUILD_MODE=DEBUG"
-					],
-				},
-				"osx": {
-					"args": [
-						"RAYLIB_PATH=<path_to_raylib>/raylib",
-						"BUILD_MODE=DEBUG"
-					],
+					"command": "mingw32-make.exe"
 				},
 				"group": {
 					"kind": "build",
@@ -110,24 +90,18 @@
 				"args": [
 					"PLATFORM=PLATFORM_DESKTOP",
 					"BUILD_MODE=RELEASE",
+					"RAYLIB_PATH=C:/raylib/raylib"
 				],
 				"windows": {
-					"command": "mingw32-make.exe",
-					"args": [
-						"RAYLIB_PATH=C:/raylib/raylib",
-						"BUILD_MODE=RELEASE"
-					],
+					"command": "mingw32-make.exe"
 				},
-				"osx": {
-					"args": [
-						"RAYLIB_PATH=<path_to_raylib>/raylib",
-						"BUILD_MODE=RELEASE"
-					],
+				"group": {
+					"kind": "build",
+					"isDefault": false
 				},
-				"group": "build",
 				"problemMatcher": [
 					"$gcc"
-				],
+				]
 			}
 		]
 	}
