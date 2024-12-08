@@ -6,12 +6,14 @@
 
 #include "ball.h"
 
-#define PLAYER_LINE_THICKNESS 5
-#define PLAYER_MAX_SPEED 10
-#define PLAYER_MIN_SPEED 1
+#define PLAYER_LINE_THICKNESS 5.0f
+#define PLAYER_BALL_RADIUS 10.0f
 
-#define PLAYER_RADIUS 150
+#define PLAYER_MAX_SPEED 10.0f
+#define PLAYER_MIN_SPEED 1.0f
 #define PLAYER_SPEED 5.0f
+
+#define PLAYER_RADIUS 150.0f
 
 typedef struct Player
 {

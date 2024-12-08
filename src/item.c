@@ -30,12 +30,15 @@ void CreateItem(Item *item, ItemType type, float radius)
     }
 }
 
-void CreateItems(Item items[], int count, float radius)
+void CreateItems(Item **head, int count, float radius)
 {
     for (int i = 0; i < count; i++)
     {
+        Item *new_item = (Item *)malloc(sizeof(Item));
         ItemType type = (ItemType)GetRandomValue(0, ITEM_FAST);
-        CreateItem(&items[i], type, radius);
+        CreateItem(new_item, type, radius);
+        new_item->next = *head; // Insert at the head
+        *head = new_item;
     }
 }
 
@@ -44,11 +47,13 @@ void DrawItem(Item *item)
     DrawBall(&item->ball);
 }
 
-void DrawItems(Item items[], int count)
+void DrawItems(Item *head)
 {
-    for (int i = 0; i < count; i++)
+    Item *current = head;
+    while (current != NULL)
     {
-        DrawItem(&items[i]);
+        DrawItem(current);
+        current = current->next;
     }
 }
 
@@ -67,11 +72,13 @@ void ScatterItem(Item *item, Camera2D camera, float exclusion_radius)
     } while (Vector2Distance(item->ball.position, camera.target) < exclusion_radius);
 }
 
-void ScatterItems(Item items[], int count, Camera2D camera, float exclusion_radius)
+void ScatterItems(Item *head, Camera2D camera, float exclusion_radius)
 {
-    for (int i = 0; i < count; i++)
+    Item *current = head;
+    while (current != NULL)
     {
-        ScatterItem(&items[i], camera, exclusion_radius);
+        ScatterItem(current, camera, exclusion_radius);
+        current = current->next;
     }
 }
 
@@ -89,11 +96,13 @@ void CheckItemCollision(Item *item, Player *player, Camera2D camera, float exclu
         ScatterItem(item, camera, exclusion_radius);
 }
 
-void CheckItemCollisions(Item items[], int count, Player *player, Camera2D camera, float exclusion_radius)
+void CheckItemCollisions(Item *head, Player *player, Camera2D camera, float exclusion_radius)
 {
-    for (int i = 0; i < count; i++)
+    Item *current = head;
+    while (current != NULL)
     {
-        CheckItemCollision(&items[i], player, camera, exclusion_radius);
+        CheckItemCollision(current, player, camera, exclusion_radius);
+        current = current->next;
     }
 }
 
@@ -119,5 +128,16 @@ void ItemCollide(Item *item, Player *player)
 
     default:
         break;
+    }
+}
+
+void FreeItems(Item *head)
+{
+    Item *current = head;
+    while (current != NULL)
+    {
+        Item *next = current->next;
+        free(current);
+        current = next;
     }
 }

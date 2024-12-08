@@ -18,15 +18,10 @@
 #define PLAYER_BALL_IMAGE "resources/img/ball1.png"
 #define ITEM_BALL_IMAGE "resources/img/ball2.png"
 
-#define CAMERA_FOLLOW_SPEED 0.1f
-#define PLAYER_BALL_RADIUS 10
-#define ITEM_BALL_RADIUS 10
-#define MAX_ITEMS 10
-
 Ball b1, b2;
 Player player;
 Camera2D camera;
-Item items[MAX_ITEMS];
+Item *items;
 
 static void Initialize(void);
 static void MainLoop(void);
@@ -44,6 +39,7 @@ int main()
     }
 
     // ~ De-Initialization
+    FreeItems(items);
     CloseWindow();
 
     return 0;
@@ -59,8 +55,8 @@ static void Initialize()
 
     CreatePlayer(&player, &b1, &b2);
     CreateCamera(&camera, WIDTH, HEIGHT);
-    CreateItems(items, MAX_ITEMS, ITEM_BALL_RADIUS);
-    ScatterItems(items, MAX_ITEMS, camera, PLAYER_RADIUS);
+    CreateItems(&items, MAX_ITEMS, ITEM_BALL_RADIUS);
+    ScatterItems(items, camera, PLAYER_RADIUS);
 }
 
 static void MainLoop()
@@ -72,14 +68,14 @@ static void MainLoop()
     // ~ Update
     UpdatePlayer(&player);
     UpdateCameraTarget(&camera, player.pivotBall->position, CAMERA_FOLLOW_SPEED);
-    CheckItemCollisions(items, MAX_ITEMS, &player, camera, PLAYER_RADIUS);
+    CheckItemCollisions(items, &player, camera, PLAYER_RADIUS);
 
     // ~ Draw
     BeginDrawing();
     ClearBackground(RAYWHITE);
 
     BeginMode2D(camera);
-    DrawItems(items, MAX_ITEMS);
+    DrawItems(items);
     DrawPlayer(&player);
     EndMode2D();
 
