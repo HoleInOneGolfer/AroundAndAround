@@ -1,22 +1,41 @@
 #include "item.h"
 
-void CreateItem(Item *item, ItemType type, Color color, float radius, int value)
+void CreateItem(Item *item, ItemType type, float radius)
 {
-    item->ball = (Ball){
-        .position = Vector2Zero(),
-        .color = color,
-        .radius = radius,
-    };
-    item->value = value;
     item->type = type;
+    item->ball.position = Vector2Zero();
+    item->ball.radius = radius;
+    item->value = 0;
+
+    switch (type)
+    {
+    case ITEM_POINT:
+        item->value = 1;
+        CreateBallImage(&item->ball, item->ball.position, item->ball.radius, LoadTexture("resources/img/ball2.png"));
+        break;
+
+    case ITEM_REVERSE:
+        CreateBallColor(&item->ball, item->ball.position, item->ball.radius, RED);
+        break;
+
+    case ITEM_SLOW:
+        CreateBallColor(&item->ball, item->ball.position, item->ball.radius, BLUE);
+        break;
+
+    case ITEM_FAST:
+        CreateBallColor(&item->ball, item->ball.position, item->ball.radius, ORANGE);
+        break;
+
+    default:
+    }
 }
 
-void CreateItems(Item items[], int count, Color color, float radius, int value)
+void CreateItems(Item items[], int count, float radius)
 {
     for (int i = 0; i < count; i++)
     {
         ItemType type = (ItemType)GetRandomValue(0, ITEM_FAST);
-        CreateItem(&items[i], type, GetItemColor(type), radius, value);
+        CreateItem(&items[i], type, radius);
     }
 }
 
@@ -100,26 +119,5 @@ void ItemCollide(Item *item, Player *player)
 
     default:
         break;
-    }
-}
-
-Color GetItemColor(ItemType type)
-{
-    switch (type)
-    {
-    case ITEM_POINT:
-        return YELLOW;
-
-    case ITEM_REVERSE:
-        return ORANGE;
-
-    case ITEM_SLOW:
-        return MAROON;
-
-    case ITEM_FAST:
-        return GREEN;
-
-    default:
-        return GRAY;
     }
 }
