@@ -1,12 +1,12 @@
 #include "player.h"
 
-void CreatePlayer(Player *player, Ball *pivotBall, Ball *activeBall, float radius, float speed)
+void CreatePlayer(Player *player, Ball *pivotBall, Ball *activeBall)
 {
     player->pivotBall = pivotBall;
     player->activeBall = activeBall;
     player->theta = 0;
-    player->speed = speed;
-    player->radius = radius;
+    player->speed = PLAYER_SPEED;
+    player->radius = PLAYER_RADIUS;
     player->direction = 1;
     player->score = 0;
 }
@@ -64,5 +64,4 @@ void DrawUI(Player *player)
 {
     DrawText(TextFormat("Score: %i", player->score), 10, 10, 20, BLACK);
     DrawText(TextFormat("Speed: %.2f", player->speed), 10, 40, 20, BLACK);
-    DrawText(TextFormat("Direction: %s", player->direction == 1 ? "Clockwise" : "Counter-Clockwise"), 10, 70, 20, BLACK);
 }
