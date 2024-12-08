@@ -15,13 +15,12 @@
 #define HEIGHT 450
 #define FPS 60
 
-#define PLAYER_BALL_IMAGE "resources/img/ball1.png"
-#define ITEM_BALL_IMAGE "resources/img/ball2.png"
-
 #define CAMERA_FOLLOW_SPEED 0.1f
-#define PLAYER_BALL_RADIUS 10
-#define ITEM_BALL_RADIUS 10
+#define BALL_RADIUS 10
+#define PLAYER_RADIUS 150
+#define PLAYER_SPEED 5.0f
 #define MAX_ITEMS 10
+#define ITEM_RADIUS 10
 
 Ball b1, b2;
 Player player;
@@ -54,12 +53,11 @@ static void Initialize()
     InitWindow(WIDTH, HEIGHT, TITLE);
     SetWindowIcon(LoadImage(ICON));
 
-    CreateBallImage(&b1, (Vector2){WIDTH / 2, HEIGHT / 2}, PLAYER_BALL_RADIUS, LoadTexture(PLAYER_BALL_IMAGE));
-    CreateBallImage(&b2, (Vector2){WIDTH / 2, HEIGHT / 2}, PLAYER_BALL_RADIUS, LoadTexture(PLAYER_BALL_IMAGE));
-
-    CreatePlayer(&player, &b1, &b2);
+    CreateBall(&b1, (Vector2){WIDTH / 2, HEIGHT / 2}, BLUE, BALL_RADIUS);
+    CreateBall(&b2, (Vector2){WIDTH / 2, HEIGHT / 2}, RED, BALL_RADIUS);
+    CreatePlayer(&player, &b1, &b2, PLAYER_RADIUS, PLAYER_SPEED);
     CreateCamera(&camera, WIDTH, HEIGHT);
-    CreateItems(items, MAX_ITEMS, ITEM_BALL_RADIUS);
+    CreateItems(items, MAX_ITEMS, GREEN, ITEM_RADIUS, 1);
     ScatterItems(items, MAX_ITEMS, camera, PLAYER_RADIUS);
 }
 
