@@ -2,9 +2,11 @@
 
 void CreateItem(Item *item, ItemType type, Color color, float radius, int value)
 {
-    item->position = Vector2Zero();
-    item->color = color;
-    item->radius = radius;
+    item->ball = (Ball){
+        .position = Vector2Zero(),
+        .color = color,
+        .radius = radius,
+    };
     item->value = value;
     item->type = type;
 }
@@ -20,7 +22,7 @@ void CreateItems(Item items[], int count, Color color, float radius, int value)
 
 void DrawItem(Item *item)
 {
-    DrawCircleV(item->position, item->radius, item->color);
+    DrawBall(&item->ball);
 }
 
 void DrawItems(Item items[], int count)
@@ -39,11 +41,11 @@ void ScatterItem(Item *item, Camera2D camera, float exclusion_radius)
 
     do
     {
-        item->position = (Vector2){
+        item->ball.position = (Vector2){
             GetRandomValue(min.x, max.x),
             GetRandomValue(min.y, max.y),
         };
-    } while (Vector2Distance(item->position, camera.target) < exclusion_radius);
+    } while (Vector2Distance(item->ball.position, camera.target) < exclusion_radius);
 }
 
 void ScatterItems(Item items[], int count, Camera2D camera, float exclusion_radius)
@@ -56,14 +58,14 @@ void ScatterItems(Item items[], int count, Camera2D camera, float exclusion_radi
 
 void CheckItemCollision(Item *item, Player *player, Camera2D camera, float exclusion_radius)
 {
-    float dist = DistanceToLine(item->position, player->pivotBall->position, player->activeBall->position);
-    if (dist < item->radius)
+    float dist = DistanceToLine(item->ball.position, player->pivotBall->position, player->activeBall->position);
+    if (dist < item->ball.radius)
     {
         ItemCollide(item, player);
         ScatterItem(item, camera, exclusion_radius);
     }
 
-    float dist2 = Vector2Distance(item->position, player->pivotBall->position);
+    float dist2 = Vector2Distance(item->ball.position, player->pivotBall->position);
     if (dist2 > GetScreenWidth() + player->radius)
         ScatterItem(item, camera, exclusion_radius);
 }
