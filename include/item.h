@@ -5,6 +5,7 @@
 #include <raymath.h>
 
 #include "player.h"
+#include "ball.h"
 
 typedef enum ItemType
 {
@@ -16,11 +17,9 @@ typedef enum ItemType
 
 typedef struct Item
 {
-    Vector2 position;
-    Color color;
-    float radius;
     int value;
     ItemType type;
+    Ball ball;
 } Item;
 
 void CreateItem(Item *item, ItemType type, Color color, float radius, int value);
