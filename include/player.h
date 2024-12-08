@@ -10,6 +10,9 @@
 #define PLAYER_MAX_SPEED 10
 #define PLAYER_MIN_SPEED 1
 
+#define PLAYER_RADIUS 150
+#define PLAYER_SPEED 5.0f
+
 typedef struct Player
 {
     Ball *pivotBall;
@@ -23,7 +26,7 @@ typedef struct Player
     int score;
 } Player;
 
-void CreatePlayer(Player *player, Ball *pivotBall, Ball *activeBall, float radius, float speed);
+void CreatePlayer(Player *player, Ball *pivotBall, Ball *activeBall);
 void SwapBalls(Player *player);
 void DrawPlayer(Player *player);
 void UpdatePlayer(Player *player);
