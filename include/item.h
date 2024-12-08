@@ -22,8 +22,8 @@ typedef struct Item
     Ball ball;
 } Item;
 
-void CreateItem(Item *item, ItemType type, Color color, float radius, int value);
-void CreateItems(Item item[], int count, Color color, float radius, int value);
+void CreateItem(Item *item, ItemType type, float radius);
+void CreateItems(Item item[], int count, float radius);
 
 void DrawItem(Item *item);
 void DrawItems(Item items[], int count);
@@ -35,7 +35,5 @@ void CheckItemCollision(Item *item, Player *player, Camera2D camera, float exclu
 void CheckItemCollisions(Item items[], int count, Player *player, Camera2D camera, float exclusion_radius);
 
 void ItemCollide(Item *item, Player *player);
-
-Color GetItemColor(ItemType type);
 
 #endif // ITEM_H
