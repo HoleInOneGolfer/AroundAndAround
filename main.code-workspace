@@ -12,7 +12,13 @@
 				"binaryPath": "c:\\Users\\benja\\Desktop\\Github Projects\\AroundAndAround\\build\\bin\\game.exe",
 				"binaryArgs": []
 			}
-		]
+		],
+		"files.associations": {
+			"*.c": "c",
+			"*.h": "c",
+			"*.cpp": "cpp",
+			"*.hpp": "cpp"
+		},
 	},
 	"launch": {
 		"version": "0.2.0",
