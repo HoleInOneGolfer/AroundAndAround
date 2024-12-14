@@ -3,8 +3,7 @@
 # Configurable variables
 PROJECT_NAME       ?= game
 RAYLIB_VERSION     ?= 4.5.0
-RAYLIB_PATH        ?= C:/raylib/raylib
-COMPILER_PATH      ?= C:/raylib/w64devkit/bin
+RAYLIB_DIR         ?= C:/raylib
 PLATFORM           ?= PLATFORM_DESKTOP
 BUILD_MODE         ?= DEBUG
 MY_RC              ?= game.rc
@@ -19,7 +18,7 @@ BIN_DIR            := $(BUILD_DIR)/bin
 MY_RC_DATA         := $(BUILD_DIR)/$(MY_RC:.rc=.rc.data)
 
 # Export compiler path for Windows (MinGW)
-export PATH := $(COMPILER_PATH):$(PATH)
+export PATH := $(RAYLIB_DIR)/w64devkit/bin:$(PATH)
 
 # Compiler and tools
 CC                 := gcc
@@ -28,7 +27,7 @@ RC                 := x86_64-w64-mingw32-windres
 
 # Flags
 CFLAGS             := -Wall -std=c99 -D_DEFAULT_SOURCE -Wno-missing-braces
-LDFLAGS            := -L. -L$(RAYLIB_PATH)/src -L$(RAYLIB_PATH)/src/external
+LDFLAGS            := -L. -L$(RAYLIB_DIR)/raylib/src -L$(RAYLIB_DIR)/raylib/src/external
 LDLIBS             := -lraylib -lopengl32 -lgdi32 -lwinmm
 
 ifeq ($(BUILD_MODE),DEBUG)
@@ -42,7 +41,7 @@ ifeq ($(USE_EXTERNAL_GLFW),TRUE)
 endif
 
 # Include paths
-INCLUDE_PATHS      := -I$(RAYLIB_PATH)/src -I$(RAYLIB_PATH)/src/external -I./include
+INCLUDE_PATHS      := -I$(RAYLIB_DIR)/raylib/src -I$(RAYLIB_DIR)/raylib/src/external -I./include
 
 # Directories and files
 SRC_DIR            := src
